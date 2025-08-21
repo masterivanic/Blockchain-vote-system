@@ -1,4 +1,4 @@
-## Projet Blockchain – Système de vote (Hardhat + Solidity)
+## Groupe-C - Projet Blockchain – Système de vote (Hardhat + Solidity)
 
 Ce projet met en place un système de vote simple sur Ethereum (réseau local Hardhat) :
 
@@ -118,5 +118,5 @@ Le script écrit un artefact d’adresse/ABI dans `deployments/local/Voting.json
 
 Projet éducatif – libre réutilisation dans un cadre pédagogique.
 
-# Groupe-C - Blockchain
+
  
