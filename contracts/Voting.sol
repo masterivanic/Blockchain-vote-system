@@ -1,88 +1,70 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity >=0.7.0 <0.9.0;
 
-/// @title Système de vote simple
-/// @notice Chaque adresse peut voter une seule fois pour un candidat donné.
 contract Voting {
+    struct Voter {
+        bool isAllowed;
+        bool hasVoted;
+        uint votedCandidateId;
+    }
+
+    struct Candidate {
+        string name;
+        uint voteCount;
+    }
+
     address public owner;
-    bool public isOpen;
+    mapping(address => Voter) public voters;
+    Candidate[] public candidates;
 
-    string[] private candidates;
-
-    // Adresse => a-t-elle voté ?
-    mapping(address => bool) public hasVoted;
-    // Index du candidat => nombre de votes
-    mapping(uint256 => uint256) private candidateVotes;
-    uint256 public totalVotes;
-
-    event VoteCast(address indexed voter, uint256 indexed candidateIndex);
-    event VotingOpened();
-    event VotingClosed();
+    event VoterAdded(address voter);
+    event CandidateAdded(uint candidateId, string name);
+    event VoteCast(address voter, uint candidateId);
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Not owner");
+        require(msg.sender == owner, "Only owner can call this function");
         _;
     }
 
-    modifier onlyWhenOpen() {
-        require(isOpen, "Voting closed");
-        _;
-    }
-
-    /// @param _candidates Liste des candidats (au moins 1)
-    /// @param _startOpen Démarrer le vote ouvert ou fermé
-    constructor(string[] memory _candidates, bool _startOpen) {
-        require(_candidates.length >= 1, "At least one candidate");
+    constructor() {
         owner = msg.sender;
-        isOpen = _startOpen;
-        for (uint256 i = 0; i < _candidates.length; i++) {
-            candidates.push(_candidates[i]);
-        }
     }
 
-    function openVoting() external onlyOwner {
-        require(!isOpen, "Already open");
-        isOpen = true;
-        emit VotingOpened();
+    function addVoter(address _voter) public onlyOwner {
+        require(!voters[_voter].isAllowed, "Voter already added");
+        voters[_voter] = Voter({
+            isAllowed: true,
+            hasVoted: false,
+            votedCandidateId: 0
+        });
+        emit VoterAdded(_voter);
     }
 
-    function closeVoting() external onlyOwner {
-        require(isOpen, "Already closed");
-        isOpen = false;
-        emit VotingClosed();
+    function addCandidate(string memory _name) public onlyOwner {
+        candidates.push(Candidate({
+            name: _name,
+            voteCount: 0
+        }));
+        emit CandidateAdded(candidates.length - 1, _name);
     }
 
-    /// @notice Vote pour un candidat par son index
-    function vote(uint256 candidateIndex) external onlyWhenOpen {
-        require(candidateIndex < candidates.length, "Invalid candidate");
-        require(!hasVoted[msg.sender], "Already voted");
+    function vote(uint _candidateId) public {
+        require(voters[msg.sender].isAllowed, "Not allowed to vote");
+        require(!voters[msg.sender].hasVoted, "Already voted");
+        require(_candidateId < candidates.length, "Invalid candidate");
 
-        hasVoted[msg.sender] = true;
-        candidateVotes[candidateIndex] += 1;
-        totalVotes += 1;
-        emit VoteCast(msg.sender, candidateIndex);
+        voters[msg.sender].hasVoted = true;
+        voters[msg.sender].votedCandidateId = _candidateId;
+        candidates[_candidateId].voteCount++;
+
+        emit VoteCast(msg.sender, _candidateId);
     }
 
-    function numCandidates() external view returns (uint256) {
-        return candidates.length;
+    function getCandidate(uint _candidateId) public view returns (string memory name, uint voteCount) {
+        require(_candidateId < candidates.length, "Invalid candidate");
+        return (candidates[_candidateId].name, candidates[_candidateId].voteCount);
     }
 
-    function getCandidateName(uint256 candidateIndex) external view returns (string memory) {
-        require(candidateIndex < candidates.length, "Invalid candidate");
-        return candidates[candidateIndex];
-    }
-
-    function getCandidates() external view returns (string[] memory) {
-        return candidates;
-    }
-
-    /// @return votes tableau des votes par index de candidat
-    function getResults() external view returns (uint256[] memory votes) {
-        votes = new uint256[](candidates.length);
-        for (uint256 i = 0; i < candidates.length; i++) {
-            votes[i] = candidateVotes[i];
-        }
+    function getVoter(address _voter) public view returns (bool isAllowed, bool hasVoted, uint votedCandidateId) {
+        return (voters[_voter].isAllowed, voters[_voter].hasVoted, voters[_voter].votedCandidateId);
     }
 }
-
-
