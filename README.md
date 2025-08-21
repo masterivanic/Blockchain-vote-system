@@ -110,6 +110,19 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
 
     * Notes sécurité, revue PRs.
 
+* **Japhet Ntantu — Performance & DX (Dev Experience)**
+   * Responsabilités
+   * Outillage dev : Live Server VSCode, scripts npm, conseils sur ESLint/Prettier (si ajoutés)
+   * Micro-perf UI (rafraîchissements raisonnables, intervalle léger de polling)
+   * Améliorations DX : toasts cohérents, logs utiles, structure du code JS
+   * Livrables clés :
+   * Scripts de confort (start, deploy, seed), guidelines de code
+   * Décisions techniques
+   * Polling soft (15s) + refresh ciblés après tx pour épargner le node
+   * package.json (scripts), README (tips dev), JS UI
+
+     
+
 
 ---
 
