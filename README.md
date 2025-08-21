@@ -3,8 +3,11 @@
 
 # Rôles & “qui a fait quoi” (équipe de 10)
 
+- Phillipe MBARGA – Lead Smart-Contract
+Conception Voting.sol (structures, events, onlyOwner)
+Revue sécurité des require et flux vote()
 
-Iles YAZI – DevOps Hardhat
+- Iles YAZI – DevOps Hardhat
 hardhat.config.ts (localhost:8545, chainId 31337)
 Scripts deploy.js, seed.js, scripts npm utiles
 
