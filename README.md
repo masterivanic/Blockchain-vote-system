@@ -88,6 +88,29 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
    * Livrables clés
 
 
+* ***Akbar KHAN *** — Sécurité & Conformité
+
+    * Responsabilités
+
+    * Threat modeling basique : abuse cases (ex. vote par non-autorisé).
+
+    * Recommandations de front : validation d’adresse (regex), vérif de chainId, messages pédagogiques.
+
+    * Bonnes pratiques clés privées (MetaMask) & manip de comptes de test.
+
+    * Livrables clés
+
+    * Section sécurité dans README, check-list de revue.
+
+    * Décisions techniques
+
+    * Pas d’assets de valeur ni de transferts d’ETH dans ce POC.
+
+    * Fichiers
+
+    * Notes sécurité, revue PRs.
+
+
 ---
 
 ## 🎯 Fonctionnalités
