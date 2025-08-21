@@ -21,7 +21,7 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
     * Vérification de la compatibilité Solidity 0.8.24 + optimizer.
     * Décisions techniques
 
-* **Iles – DevOps Hardhat**
+* **Iles YAZI – DevOps Hardhat**
 
    * Configuration de Hardhat : réseau localhost:8545, chainId 31337, toolbox.
    * Scripts de déploiement (ethers v6) et de seed.
