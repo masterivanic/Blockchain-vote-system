@@ -8,7 +8,7 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
 
 ---
 
-## 🔐 Rôles & “qui a fait quoi” (équipe de 10)
+## 🔐 Rôles & “qui a fait quoi”
 
 
 * **\[Nom 1] – Lead Smart-Contract**
