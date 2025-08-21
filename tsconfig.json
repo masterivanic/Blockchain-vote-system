@@ -11,6 +11,6 @@
     "types": ["node", "hardhat"]
   },
   "include": ["scripts", "test", "hardhat.config.ts"],
-  "files": ["./hardhat.config.ts"]
+  "files": ["./hardhat.config.js"]
 }
 
