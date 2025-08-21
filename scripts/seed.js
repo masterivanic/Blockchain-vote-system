@@ -1,4 +1,3 @@
-// scripts/seed.js
 const { ethers } = require("hardhat");
 
 async function main() {
