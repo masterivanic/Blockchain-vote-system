@@ -23,12 +23,9 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
 
 * **Iles – DevOps Hardhat**
 
-   * Responsabilités
    * Configuration de Hardhat : réseau localhost:8545, chainId 31337, toolbox.
    * Scripts de déploiement (ethers v6) et de seed.
-   * hardhat.config.ts (optimizer ON, chemins, network localhost).
-   * scripts/deploy.js (usage waitForDeployment(), getAddress()).
-   * scripts/seed.js (ajout candidats + autorisation d’un votant).
+   * hardhat.config.ts (optimizer ON, chemins, network localhost), scripts/deploy.js (usage waitForDeployment(), getAddress()), scripts/seed.js (ajout candidats + autorisation d’un votant).
    * Décisions techniques : Standardisation sur le port 8545, procédures Windows (netstat/taskkill) si port occupé.
    * Fichiers: hardhat.config.ts, scripts/*.js.
 
