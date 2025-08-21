@@ -1,0 +1,10 @@
+{
+  "network": "hardhat",
+  "contract": "0xDeaDDeaDDeaDDeaDDeaDDeaDDeaDDeaDDeaD0000",
+  "candidates": ["Alice", "Bob", "Charlie"],
+  "results": [4, 3, 3],
+  "totalVotes": 10,
+  "closedAt": "2024-01-01T12:00:00.000Z"
+}
+
+
