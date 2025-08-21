@@ -11,13 +11,17 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
 ## 🔐 Rôles & “qui a fait quoi”
 
 
-* **\[Nom 1] – Lead Smart-Contract**
-
+* **Philippe MBARGA – Lead Smart-Contract**
     * Conception `Voting.sol` (structures, events, `onlyOwner`)
     * Revue sécurité des require et flux `vote()`
-* **\[Nom 2] – Smart-Contract Engineer**
+    * Revue sécurité (lecture/écriture storage, visibilité, reverts clairs).
+      
+* **Lucas MESSIA DOLIVEUX  – Smart-Contract Engineer (Tests & Qualité)**
+    * Écriture des tests Hardhat/ethers (v6) : couverture des exigences fonctionnelles.
+    * Vérification de la compatibilité Solidity 0.8.24 + optimizer.
+    * Décisions techniques
 
-    * Tests unitaires (si ajoutés), cas limites, gas/optimisation
+
 * **\[Nom 3] – DevOps Hardhat**
 
     * `hardhat.config.ts` (localhost:8545, chainId 31337)
