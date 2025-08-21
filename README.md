@@ -29,7 +29,7 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
    * Décisions techniques : Standardisation sur le port 8545, procédures Windows (netstat/taskkill) si port occupé.
    * Fichiers: hardhat.config.ts, scripts/*.js.
  
-* ** Ianis CHENNAF — Intégration Web3 (Front <-> Contrat)**
+* **Ianis CHENNAF — Intégration Web3 (Front <-> Contrat)**
 
    * Connexion MetaMask (Web3.js), instanciation web3.eth.Contract(ABI, address).
    * Appels aux méthodes on-chain : owner(), getVoter(), getCandidate(), addCandidate(), addVoter(), vote().
@@ -38,6 +38,15 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
    * Vote manuel (par ID/nom) + cache candidats.
    * Interrogation candidates par index 0..N jusqu’au revert, simple et robuste pour un POC.
    * index.html (section <script>), intégrations Web3.
+ 
+* **Salman Ali MADEC — Front-End Lead (UI/UX)**
+
+   * Architecture de l’interface : sections Portefeuille, Administration, Candidats/Vote, Statut, Historique.
+   * Design système : variables CSS (--primary, --secondary, badges, boutons, responsive).
+   * Maquettes (si fournies) + index.html stylé (cards, tabs, grille responsive).
+   * Expérience “Administration visible uniquement pour l’owner”.
+   * UI simple 1-fichier (HTML+CSS+JS) pour faciliter la revue.
+   * index.html (structure/markup + styles).
 
 ---
 
