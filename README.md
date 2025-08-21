@@ -1,5 +1,17 @@
 ## Groupe-C - Projet Blockchain – Système de vote (Hardhat + Solidity)
 
+
+# Rôles & “qui a fait quoi” (équipe de 10)
+
+
+Iles YAZI – DevOps Hardhat
+hardhat.config.ts (localhost:8545, chainId 31337)
+Scripts deploy.js, seed.js, scripts npm utiles
+
+
+
+
+--------
 Ce projet met en place un système de vote simple sur Ethereum (réseau local Hardhat) :
 
 - Les électeurs ne peuvent voter qu’une seule fois
