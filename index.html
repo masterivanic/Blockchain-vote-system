@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting DApp</title>
+    <style>
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--dark-color);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+        
+        .card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        .wallet-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .wallet-address {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .candidate-list {
+            list-style: none;
+        }
+        
+        .candidate-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        
+        .candidate-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .vote-count {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .vote-history {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .history-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .status {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .status-allowed {
+            background-color: #e8f5e9;
+            color: var(--success-color);
+        }
+        
+        .status-not-allowed {
+            background-color: #ffebee;
+            color: var(--danger-color);
+        }
+        
+        .status-voted {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+        }
+        
+        .alert {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        
+        .alert-info {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+        }
+        
+        .alert-success {
+            background-color: #e8f5e9;
+            color: var(--success-color);
+        }
+        
+        .alert-error {
+            background-color: #ffebee;
+            color: var(--danger-color);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Voting DApp</h1>
+            <p class="subtitle">Decentralized Voting Application powered by Ethereum</p>
+        </header>
+        
+        <div class="wallet-section">
+            <h2>Connect Your Wallet</h2>
+            <p>To vote, you need to connect your MetaMask wallet</p>
+            <button id="connectWallet" class="btn btn-primary">Connect MetaMask</button>
+            <div id="walletInfo" style="display: none;">
+                <p>Connected Account:</p>
+                <p class="wallet-address" id="accountAddress"></p>
+                <p>Network: <span id="networkName"></span></p>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="card">
+                <h3 class="card-title">Candidates</h3>
+                <div id="candidateList" class="candidate-list">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading candidates...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">Voting Status</h3>
+                <div id="votingStatus">
+                    <p>Connect your wallet to see voting status</p>
+                </div>
+                
+                <h3 class="card-title" style="margin-top: 20px;">Vote History</h3>
+                <div id="voteHistory" class="vote-history">
+                    <p>No voting history available</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Voting DApp &copy; 2023 | Powered by Ethereum Smart Contracts</p>
+        </footer>
+    </div>
+
+    <script>
+        // Contract ABI (simplified for the frontend)
+        const contractABI = [
+            {
+                "inputs": [],
+                "name": "owner",
+                "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+                "name": "voters",
+                "outputs": [
+                    {"internalType": "bool", "name": "isAllowed", "type": "bool"},
+                    {"internalType": "bool", "name": "hasVoted", "type": "bool"},
+                    {"internalType": "uint256", "name": "votedCandidateId", "type": "uint256"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "name": "candidates",
+                "outputs": [
+                    {"internalType": "string", "name": "name", "type": "string"},
+                    {"internalType": "uint256", "name": "voteCount", "type": "uint256"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [{"internalType": "uint256", "name": "_candidateId", "type": "uint256"}],
+                "name": "vote",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [{"internalType": "uint256", "name": "_candidateId", "type": "uint256"}],
+                "name": "getCandidate",
+                "outputs": [
+                    {"internalType": "string", "name": "name", "type": "string"},
+                    {"internalType": "uint256", "name": "voteCount", "type": "uint256"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [{"internalType": "address", "name": "_voter", "type": "address"}],
+                "name": "getVoter",
+                "outputs": [
+                    {"internalType": "bool", "name": "isAllowed", "type": "bool"},
+                    {"internalType": "bool", "name": "hasVoted", "type": "bool"},
+                    {"internalType": "uint256", "name": "votedCandidateId", "type": "uint256"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+
+        // Contract address (you'll need to replace this with your deployed contract address)
+        const contractAddress = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
+
+        let web3;
+        let votingContract;
+        let account;
+
+        // Initialize the application
+        window.addEventListener('load', async () => {
+            // Check if MetaMask is installed
+            if (typeof window.ethereum !== 'undefined') {
+                web3 = new Web3(window.ethereum);
+                votingContract = new web3.eth.Contract(contractABI, contractAddress);
+                
+                // Check if already connected
+                const accounts = await web3.eth.getAccounts();
+                if (accounts.length > 0) {
+                    account = accounts[0];
+                    updateUI();
+                }
+            } else {
+                alert('Please install MetaMask to use this DApp!');
+            }
+        });
+
+        // Connect MetaMask wallet
+        document.getElementById('connectWallet').addEventListener('click', async () => {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    // Request account access
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    account = accounts[0];
+                    
+                    // Update UI
+                    updateUI();
+                    
+                } catch (error) {
+                    console.error('User denied account access');
+                }
+            } else {
+                alert('MetaMask is not installed!');
+            }
+        });
+
+        // Update UI with account and contract data
+        async function updateUI() {
+            // Show account info
+            document.getElementById('accountAddress').textContent = account;
+            document.getElementById('walletInfo').style.display = 'block';
+            
+            // Get network name
+            const networkId = await web3.eth.net.getId();
+            const networkName = getNetworkName(networkId);
+            document.getElementById('networkName').textContent = networkName;
+            
+            // Load candidates
+            await loadCandidates();
+            
+            // Load voting status
+            await loadVotingStatus();
+            
+            // Load vote history
+            await loadVoteHistory();
+        }
+
+        // Get network name from ID
+        function getNetworkName(networkId) {
+            const networks = {
+                1: 'Ethereum Mainnet',
+                3: 'Ropsten Testnet',
+                4: 'Rinkeby Testnet',
+                5: 'Goerli Testnet',
+                42: 'Kovan Testnet',
+                1337: 'Localhost'
+            };
+            return networks[networkId] || `Unknown Network (${networkId})`;
+        }
+
+        // Load candidates from contract
+        async function loadCandidates() {
+            const candidateList = document.getElementById('candidateList');
+            candidateList.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading candidates...</p></div>';
+            
+            try {
+                // In a real scenario, we would get the candidate count first
+                // For this example, we'll assume 3 candidates
+                let candidatesHTML = '';
+                
+                for (let i = 0; i < 3; i++) {
+                    const candidate = await votingContract.methods.getCandidate(i).call();
+                    candidatesHTML += `
+                        <div class="candidate-item">
+                            <div>
+                                <strong>${candidate.name}</strong>
+                                <div class="vote-count">${candidate.voteCount} votes</div>
+                            </div>
+                            <button class="btn btn-primary" onclick="voteForCandidate(${i})">Vote</button>
+                        </div>
+                    `;
+                }
+                
+                candidateList.innerHTML = candidatesHTML;
+            } catch (error) {
+                candidateList.innerHTML = '<div class="alert alert-error">Error loading candidates</div>';
+                console.error(error);
+            }
+        }
+
+        // Load voting status for current user
+        async function loadVotingStatus() {
+            const votingStatus = document.getElementById('votingStatus');
+            
+            if (!account) {
+                votingStatus.innerHTML = '<div class="alert alert-info">Connect your wallet to see voting status</div>';
+                return;
+            }
+            
+            try {
+                const voter = await votingContract.methods.getVoter(account).call();
+                
+                let statusHTML = '';
+                if (voter.isAllowed) {
+                    statusHTML += '<div class="alert alert-success status status-allowed">You are allowed to vote</div>';
+                } else {
+                    statusHTML += '<div class="alert alert-error status status-not-allowed">You are not allowed to vote</div>';
+                }
+                
+                if (voter.hasVoted) {
+                    statusHTML += '<div class="alert alert-info status status-voted">You have already voted</div>';
+                    const candidate = await votingContract.methods.getCandidate(voter.votedCandidateId).call();
+                    statusHTML += `<p>You voted for: <strong>${candidate.name}</strong></p>`;
+                } else {
+                    statusHTML += '<p>You have not voted yet</p>';
+                }
+                
+                votingStatus.innerHTML = statusHTML;
+            } catch (error) {
+                votingStatus.innerHTML = '<div class="alert alert-error">Error loading voting status</div>';
+                console.error(error);
+            }
+        }
+
+        // Load vote history (simulated for this example)
+        async function loadVoteHistory() {
+            const voteHistory = document.getElementById('voteHistory');
+            
+            if (!account) {
+                voteHistory.innerHTML = '<p>Connect your wallet to see vote history</p>';
+                return;
+            }
+            
+            try {
+                // In a real scenario, we would get actual vote history from events
+                // For this example, we'll simulate some history
+                const voter = await votingContract.methods.getVoter(account).call();
+                
+                if (voter.hasVoted) {
+                    const candidate = await votingContract.methods.getCandidate(voter.votedCandidateId).call();
+                    const block = await web3.eth.getBlock('latest');
+                    const timestamp = new Date(block.timestamp * 1000).toLocaleString();
+                    
+                    voteHistory.innerHTML = `
+                        <div class="history-item">
+                            <div>
+                                <strong>${candidate.name}</strong>
+                                <div>${timestamp}</div>
+                            </div>
+                            <div class="status status-voted">Voted</div>
+                        </div>
+                    `;
+                } else {
+                    voteHistory.innerHTML = '<p>No voting history found</p>';
+                }
+            } catch (error) {
+                voteHistory.innerHTML = '<div class="alert alert-error">Error loading vote history</div>';
+                console.error(error);
+            }
+        }
+
+        // Vote for a candidate
+        async function voteForCandidate(candidateId) {
+            if (!account) {
+                alert('Please connect your wallet first!');
+                return;
+            }
+            
+            try {
+                // Check if already voted
+                const voter = await votingContract.methods.getVoter(account).call();
+                if (voter.hasVoted) {
+                    alert('You have already voted!');
+                    return;
+                }
+                
+                // Send vote transaction
+                await votingContract.methods.vote(candidateId).send({ from: account });
+                
+                alert('Vote successful!');
+                
+                // Refresh UI
+                await loadCandidates();
+                await loadVotingStatus();
+                await loadVoteHistory();
+                
+            } catch (error) {
+                alert('Error voting: ' + error.message);
+                console.error(error);
+            }
+        }
+    </script>
+
+    <!-- Include Web3 library -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+</body>
+</html>
