@@ -47,6 +47,15 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
    * Expérience “Administration visible uniquement pour l’owner”.
    * UI simple 1-fichier (HTML+CSS+JS) pour faciliter la revue.
    * index.html (structure/markup + styles).
+ 
+* **Matéo OUDART — Événements & Historique On-chain**
+
+   * Récupération des événements VoteCast via getPastEvents.
+   * Récupération des timestamps de blocs pour afficher les dates lisibles.
+   * Onglets Mon historique vs Tous les votes.
+   * Liste historisée (200 derniers max), lien vers explorer (placeholder).
+   * Cache léger + tri côté client par date.
+   * JS historique dans index.html.
 
 ---
 
