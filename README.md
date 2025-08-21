@@ -6,6 +6,47 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
 * **Déploiement local** : Hardhat (`localhost:8545`, chainId **31337**)
 * **Front** : `index.html` (Web3.js)
 
+---
+
+## 🔐 Rôles & “qui a fait quoi” (équipe de 10)
+
+
+* **\[Nom 1] – Lead Smart-Contract**
+
+    * Conception `Voting.sol` (structures, events, `onlyOwner`)
+    * Revue sécurité des require et flux `vote()`
+* **\[Nom 2] – Smart-Contract Engineer**
+
+    * Tests unitaires (si ajoutés), cas limites, gas/optimisation
+* **\[Nom 3] – DevOps Hardhat**
+
+    * `hardhat.config.ts` (localhost:8545, chainId 31337)
+    * Scripts `deploy.js`, `seed.js`, scripts npm utiles
+* **\[Nom 4] – Intégration Web3**
+
+    * Connexion Web3 → contrat (`web3.eth.Contract`, ABI)
+    * Appels `addCandidate/addVoter/vote`, gestion d’erreurs
+* **\[Nom 5] – Front-End Lead**
+
+    * Architecture UI `index.html`, composants/sections, état & badges
+* **\[Nom 6] – UI/UX**
+
+    * Styles (thème, responsive), snackbar, micro-interactions
+* **\[Nom 7] – Historique & Events**
+
+    * Récup `getPastEvents('VoteCast')`, mapping timestamp bloc
+* **\[Nom 8] – QA / Tests manuels**
+
+    * Scénarios : autorisation, double vote, ID invalide, reset node
+* **\[Nom 9] – Docs & PM**
+
+    * Rédaction **README**, procédures, check-lists, conventions commit
+* **\[Nom 10] – Sécurité / Revue**
+
+    * Menaces : owner hijack, entrées invalides, reset réseau, UX erreurs
+
+---
+
 ## 🎯 Fonctionnalités
 
 * Connexion MetaMask (badges d’état réseau / contrat / compte)
@@ -101,45 +142,6 @@ await (await V.addVoter("<ADRESSE_METAMASK_VOTANT>")).wait();
 * **MetaMask** → réseau **Localhost 8545** (chainId **31337**).
 * Connectez-vous avec **l’owner** pour voir la carte **Administration**.
 * Créez des candidats, **autorisez** l’adresse qui va voter, puis **votez**.
-
----
-
-## 🔐 Rôles & “qui a fait quoi” (équipe de 10)
-
-
-* **\[Nom 1] – Lead Smart-Contract**
-
-    * Conception `Voting.sol` (structures, events, `onlyOwner`)
-    * Revue sécurité des require et flux `vote()`
-* **\[Nom 2] – Smart-Contract Engineer**
-
-    * Tests unitaires (si ajoutés), cas limites, gas/optimisation
-* **\[Nom 3] – DevOps Hardhat**
-
-    * `hardhat.config.ts` (localhost:8545, chainId 31337)
-    * Scripts `deploy.js`, `seed.js`, scripts npm utiles
-* **\[Nom 4] – Intégration Web3**
-
-    * Connexion Web3 → contrat (`web3.eth.Contract`, ABI)
-    * Appels `addCandidate/addVoter/vote`, gestion d’erreurs
-* **\[Nom 5] – Front-End Lead**
-
-    * Architecture UI `index.html`, composants/sections, état & badges
-* **\[Nom 6] – UI/UX**
-
-    * Styles (thème, responsive), snackbar, micro-interactions
-* **\[Nom 7] – Historique & Events**
-
-    * Récup `getPastEvents('VoteCast')`, mapping timestamp bloc
-* **\[Nom 8] – QA / Tests manuels**
-
-    * Scénarios : autorisation, double vote, ID invalide, reset node
-* **\[Nom 9] – Docs & PM**
-
-    * Rédaction **README**, procédures, check-lists, conventions commit
-* **\[Nom 10] – Sécurité / Revue**
-
-    * Menaces : owner hijack, entrées invalides, reset réseau, UX erreurs
 
 ---
 
