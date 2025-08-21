@@ -28,51 +28,25 @@
             color: var(--text);
         }
 
-        .wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px;
-        }
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
 
         header {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 16px;
-            padding: 28px 24px;
-            box-shadow: 0 12px 30px rgba(0,0,0,.18);
+            color: white; border-radius: 16px; padding: 28px 24px; box-shadow: 0 12px 30px rgba(0,0,0,.18);
         }
-
         header h1 { margin: 0 0 6px; font-size: 28px; }
         header p { margin: 0; opacity: .9; }
 
-        .grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
+        .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; margin-top: 20px; }
 
-        .card {
-            background: var(--card);
-            border-radius: 14px;
-            box-shadow: 0 10px 28px rgba(0,0,0,.12);
-            padding: 18px;
-            border: 1px solid #eef0ff;
-        }
-
+        .card { background: var(--card); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,.12); padding: 18px; border: 1px solid #eef0ff; }
         .card h2, .card h3 { margin-top: 0; color: var(--primary); }
         .subtle { color: var(--muted); font-size: 14px; }
 
         .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .stack { display: grid; gap: 10px; }
 
-        .btn {
-            appearance: none; border: 0; cursor: pointer;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white; padding: 10px 16px; border-radius: 999px; font-weight: 600;
-            box-shadow: 0 4px 12px rgba(78,84,200,.25);
-            transition: transform .15s ease, box-shadow .15s ease; font-size: 14px;
-        }
+        .btn { appearance: none; border: 0; cursor: pointer; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; padding: 10px 16px; border-radius: 999px; font-weight: 600; box-shadow: 0 4px 12px rgba(78,84,200,.25); transition: transform .15s ease, box-shadow .15s ease; font-size: 14px; }
         .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(78,84,200,.3); }
         .btn-ghost { background: #eef0ff; color: var(--primary); box-shadow: none; }
         .btn-danger { background: var(--err); box-shadow: 0 4px 12px rgba(220,38,38,.25); }
@@ -85,21 +59,12 @@
 
         .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
-        input, textarea, select {
-            width: 100%; padding: 11px 12px; border-radius: 10px; border: 1px solid #e5e7eb; outline: none;
-            background: white; font-size: 14px; color: var(--text);
-            transition: box-shadow .15s ease, border-color .15s ease;
-        }
-        input:focus, textarea:focus, select:focus {
-            border-color: var(--primary); box-shadow: 0 0 0 6px var(--ring);
-        }
+        input, textarea, select { width: 100%; padding: 11px 12px; border-radius: 10px; border: 1px solid #e5e7eb; outline: none; background: white; font-size: 14px; color: var(--text); transition: box-shadow .15s ease, border-color .15s ease; }
+        input:focus, textarea:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 6px var(--ring); }
         label { font-size: 13px; color: var(--muted); }
 
         .list { display: grid; gap: 10px; }
-        .item {
-            display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
-            padding: 12px; border: 1px solid #eef0ff; border-radius: 12px; background: white;
-        }
+        .item { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 12px; border: 1px solid #eef0ff; border-radius: 12px; background: white; }
 
         .hr { height: 1px; background: #eef0ff; margin: 10px 0; border-radius: 1px; }
 
@@ -107,13 +72,7 @@
         .tab { padding: 8px 12px; border-radius: 999px; background: #eef0ff; color: var(--primary); cursor: pointer; font-weight: 600; font-size: 13px; }
         .tab.active { background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; }
 
-        .muted { opacity: .75; }
-
-        .snackbar {
-            position: fixed; left: 50%; transform: translateX(-50%);
-            bottom: 24px; background: #111827; color: white; padding: 12px 16px; border-radius: 10px;
-            display: none; box-shadow: 0 10px 24px rgba(0,0,0,.35);
-        }
+        .snackbar { position: fixed; left: 50%; transform: translateX(-50%); bottom: 24px; background: #111827; color: white; padding: 12px 16px; border-radius: 10px; display: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
 
         footer { text-align: center; color: white; margin: 20px 0 10px; opacity: .9; }
 
@@ -183,6 +142,15 @@
             <div id="candList" class="list">
                 <div class="subtle">Chargement des candidats…</div>
             </div>
+            <div class="hr"></div>
+            <div class="stack" id="manualVoteBox">
+                <label for="manualVoteInput">Vote manuel (ID ou nom du candidat)</label>
+                <div class="row">
+                    <input id="manualVoteInput" type="text" placeholder="Ex: 0 ou &quot;Alice&quot;" />
+                    <button id="btnManualVote" class="btn">Voter</button>
+                </div>
+                <div class="subtle">Utile si la liste n'apparaît pas ou pour saisir un ID directement.</div>
+            </div>
             <div class="row" style="margin-top:10px;">
                 <button id="btnRefreshCand" class="btn btn-ghost">Rafraîchir</button>
             </div>
@@ -223,10 +191,8 @@
     /*********************************
      * CONFIG – À ADAPTER
      *********************************/
-        // ⚠️ Remplace par l'adresse DÉPLOYÉE de TON contrat
-    const CONTRACT_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
+    const CONTRACT_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"; // ⚠️ remplace par l'adresse de TON contrat
 
-    // Copie EXACTE de ton ABI (celle que tu as fournie)
     const CONTRACT_ABI = [
         {"inputs":[],"stateMutability":"nonpayable","type":"constructor"},
         {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"candidateId","type":"uint256"},{"indexed":false,"internalType":"string","name":"name","type":"string"}],"name":"CandidateAdded","type":"event"},
@@ -242,8 +208,7 @@
         {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"voters","outputs":[{"internalType":"bool","name":"isAllowed","type":"bool"},{"internalType":"bool","name":"hasVoted","type":"bool"},{"internalType":"uint256","name":"votedCandidateId","type":"uint256"}],"stateMutability":"view","type":"function"}
     ];
 
-    // (Optionnel) Pour accélérer getPastEvents, mets ici le block du déploiement
-    const DEPLOYMENT_BLOCK = 0; // remplace par le numéro si tu le connais
+    const DEPLOYMENT_BLOCK = 0; // (optionnel) mets le block du déploiement
 
     /*********************************
      * ÉTAT GLOBAL
@@ -253,6 +218,7 @@
     let account = null;  // Adresse connectée
     let isOwner = false; // Flag admin
     let tab = 'mine';    // onglet historique actif
+    let candCache = [];  // candidats pour vote manuel
 
     /*********************************
      * UTILITAIRES UI
@@ -261,11 +227,7 @@
     const $$ = (sel) => Array.from(document.querySelectorAll(sel));
     const short = (addr) => addr ? addr.slice(0,6) + '…' + addr.slice(-4) : '';
     const show = (el, v=true) => el.style.display = v ? '' : 'none';
-    const snackbar = (msg) => {
-        const el = $('#snackbar');
-        el.textContent = msg; el.style.display = 'block';
-        setTimeout(() => el.style.display = 'none', 2800);
-    };
+    const snackbar = (msg) => { const el = $('#snackbar'); el.textContent = msg; el.style.display = 'block'; setTimeout(() => el.style.display = 'none', 2800); };
 
     const setBadges = async () => {
         const connBadge = $('#connBadge');
@@ -288,91 +250,50 @@
             const chainId = parseInt(chainIdHex, 16);
             const names = {1:'Ethereum',5:'Goerli',11155111:'Sepolia',137:'Polygon',80001:'Mumbai',31337:'Hardhat',1337:'Localhost',5777:'Ganache'};
             netBadge.textContent = `Réseau: ${names[chainId] || chainId}`;
-        } catch(e) {
-            netBadge.textContent = 'Réseau: inconnu';
-        }
+        } catch(e) { netBadge.textContent = 'Réseau: inconnu'; }
 
-        // Vérifier que le contrat existe
         try {
             const code = await web3.eth.getCode(CONTRACT_ADDRESS);
-            if (code && code !== '0x') {
-                contractBadge.textContent = 'Contrat: OK';
-                contractBadge.className = 'badge badge-ok';
-            } else {
-                contractBadge.textContent = 'Contrat: introuvable';
-                contractBadge.className = 'badge badge-err';
-            }
-        } catch(e) {
-            contractBadge.textContent = 'Contrat: erreur';
-            contractBadge.className = 'badge badge-warn';
-        }
+            if (code && code !== '0x') { contractBadge.textContent = 'Contrat: OK'; contractBadge.className = 'badge badge-ok'; }
+            else { contractBadge.textContent = 'Contrat: introuvable'; contractBadge.className = 'badge badge-err'; }
+        } catch(e) { contractBadge.textContent = 'Contrat: erreur'; contractBadge.className = 'badge badge-warn'; }
     };
 
     /*********************************
      * INITIALISATION & WALLET
      *********************************/
     const init = async () => {
-        if (!window.ethereum) {
-            snackbar('MetaMask non détecté. Installe-le pour continuer.');
-            return;
-        }
+        if (!window.ethereum) { snackbar('MetaMask non détecté. Installe-le pour continuer.'); return; }
 
         web3 = new Web3(window.ethereum);
         contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
-        // Essaye de te connecter automatiquement (certains navigateurs exigent un clic utilisateur)
-        try {
-            const accs = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            if (accs && accs.length) {
-                account = accs[0];
-            }
-        } catch (e) {
-            // refus utilisateur – on laisse le bouton visible
-        }
+        try { const accs = await window.ethereum.request({ method: 'eth_requestAccounts' }); if (accs && accs.length) { account = accs[0]; } } catch (e) {}
 
         await postConnectUI();
 
-        // Listeners MetaMask
-        window.ethereum.on('accountsChanged', async (accs) => {
-            account = accs && accs.length ? accs[0] : null;
-            await postConnectUI();
-        });
+        window.ethereum.on('accountsChanged', async (accs) => { account = accs && accs.length ? accs[0] : null; await postConnectUI(); });
         window.ethereum.on('chainChanged', () => window.location.reload());
 
-        // Actions
         $('#btnConnect').addEventListener('click', connectWallet);
         $('#btnRetry').addEventListener('click', connectWallet);
-        $('#btnCopy').addEventListener('click', async () => {
-            try { await navigator.clipboard.writeText(account); snackbar('Adresse copiée.'); } catch(e) {}
-        });
-        $('#btnDisconnect').addEventListener('click', () => { // UI only
-            account = null; isOwner = false; updateWalletUI();
-            $('#voterStatus').innerHTML = '<div class="subtle">Connectez votre portefeuille pour voir votre statut.</div>';
-            $('#candList').innerHTML = '<div class="subtle">Connectez-vous pour charger les candidats.</div>';
-            $('#history').innerHTML = '<div class="subtle">Aucun historique.</div>';
-            setBadges();
-        });
+        $('#btnCopy').addEventListener('click', async () => { try { await navigator.clipboard.writeText(account); snackbar('Adresse copiée.'); } catch(e) {} });
+        $('#btnDisconnect').addEventListener('click', () => { account = null; isOwner = false; updateWalletUI(); $('#voterStatus').innerHTML = '<div class="subtle">Connectez votre portefeuille pour voir votre statut.</div>'; $('#candList').innerHTML = '<div class="subtle">Connectez-vous pour charger les candidats.</div>'; $('#history').innerHTML = '<div class="subtle">Aucun historique.</div>'; setBadges(); });
 
         $('#btnAddCand').addEventListener('click', onAddCandidate);
         $('#btnAllowVoter').addEventListener('click', onAllowVoter);
         $('#btnRefreshCand').addEventListener('click', loadCandidates);
         $('#btnRefreshHistory').addEventListener('click', loadHistory);
+        $('#btnManualVote').addEventListener('click', onManualVote);
+        $('#manualVoteInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ onManualVote(); }});
 
-        // Tabs
         $('#tabMine').addEventListener('click', () => { tab='mine'; setTabUI(); loadHistory(); });
         $('#tabAll').addEventListener('click', () => { tab='all'; setTabUI(); loadHistory(); });
     };
 
     const connectWallet = async () => {
         if (!window.ethereum) return snackbar('MetaMask non détecté.');
-        try {
-            const accs = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            account = accs[0];
-            await postConnectUI();
-            snackbar('Portefeuille connecté.');
-        } catch (e) {
-            snackbar('Connexion refusée.');
-        }
+        try { const accs = await window.ethereum.request({ method: 'eth_requestAccounts' }); account = accs[0]; await postConnectUI(); snackbar('Portefeuille connecté.'); } catch (e) { snackbar('Connexion refusée.'); }
     };
 
     const postConnectUI = async () => {
@@ -380,46 +301,25 @@
         await setBadges();
         if (account) {
             await checkOwner();
-            await Promise.all([
-                loadCandidates(),
-                loadVoterStatus(),
-                loadHistory()
-            ]);
+            await Promise.all([ loadCandidates(), loadVoterStatus(), loadHistory() ]);
             subscribeLight();
         }
     };
 
     const updateWalletUI = () => {
-        if (account) {
-            $('#accountAddr').textContent = account;
-            show($('#accountRow'), true);
-            show($('#connectRow'), false);
-            show($('#btnRetry'), false);
-            $('#connBadge').className = 'badge badge-ok';
-        } else {
-            show($('#accountRow'), false);
-            show($('#connectRow'), true);
-            show($('#btnRetry'), true);
-            $('#connBadge').className = 'badge badge-err';
-        }
+        if (account) { $('#accountAddr').textContent = account; show($('#accountRow'), true); show($('#connectRow'), false); show($('#btnRetry'), false); $('#connBadge').className = 'badge badge-ok'; }
+        else { show($('#accountRow'), false); show($('#connectRow'), true); show($('#btnRetry'), true); $('#connBadge').className = 'badge badge-err'; }
     };
 
     const checkOwner = async () => {
-        try {
-            const owner = await contract.methods.owner().call();
-            isOwner = owner && account && owner.toLowerCase() === account.toLowerCase();
-            show($('#adminCard'), isOwner);
-            show($('#ownerInfo'), isOwner);
-        } catch (e) {
-            // Pas de fonction owner() -> masque admin
-            isOwner = false; show($('#adminCard'), false); show($('#ownerInfo'), false);
-        }
+        try { const owner = await contract.methods.owner().call(); isOwner = owner && account && owner.toLowerCase() === account.toLowerCase(); show($('#adminCard'), isOwner); show($('#ownerInfo'), isOwner); }
+        catch (e) { isOwner = false; show($('#adminCard'), false); show($('#ownerInfo'), false); }
     };
 
     /*********************************
      * CHARGEMENT CANDIDATS & VOTE
      *********************************/
-    const MAX_CANDIDATES = 100; // borne de sécurité si le contrat n'expose pas de compteur
+    const MAX_CANDIDATES = 100;
 
     const loadCandidates = async () => {
         const box = $('#candList');
@@ -430,18 +330,13 @@
         for (let i=0;i<MAX_CANDIDATES;i++) {
             try {
                 const c = await contract.methods.getCandidate(i).call();
-                // Si aucun nom et 0 vote, on considère que la liste est finie (selon l'implémentation)
                 if (!c.name && c.voteCount === '0') break;
                 items.push({ id: i, name: c.name, votes: c.voteCount });
-            } catch (e) {
-                break; // on arrête à la première erreur (index hors bornes)
-            }
+            } catch (e) { break; }
         }
+        candCache = items;
 
-        if (!items.length) {
-            box.innerHTML = '<div class="subtle">Aucun candidat pour le moment.</div>';
-            return;
-        }
+        if (!items.length) { box.innerHTML = '<div class="subtle">Aucun candidat pour le moment.</div>'; return; }
 
         box.innerHTML = '';
         for (const it of items) {
@@ -461,24 +356,11 @@
 
     const voteFor = async (id) => {
         if (!account) return snackbar('Connecte ton portefeuille.');
-        try {
-            const v = await contract.methods.getVoter(account).call();
-            if (!v.isAllowed) return snackbar("Tu n'es pas autorisé à voter.");
-            if (v.hasVoted) return snackbar('Tu as déjà voté.');
-        } catch(e) {
-            // getVoter peut échouer si non inscrit
-            return snackbar("Statut de votant inconnu. Es-tu bien autorisé ?");
-        }
-
+        try { const v = await contract.methods.getVoter(account).call(); if (!v.isAllowed) return snackbar("Tu n'es pas autorisé à voter."); if (v.hasVoted) return snackbar('Tu as déjà voté.'); }
+        catch(e) { return snackbar("Statut de votant inconnu. Es-tu bien autorisé ?"); }
         if (!confirm(`Confirmer le vote pour le candidat #${id} ?`)) return;
-
-        try {
-            await contract.methods.vote(id).send({ from: account });
-            snackbar('Vote enregistré ✅');
-            await Promise.all([loadCandidates(), loadVoterStatus(), loadHistory()]);
-        } catch (e) {
-            snackbar('Échec du vote: ' + (e?.message?.split('\n')[0] || 'Erreur'));
-        }
+        try { await contract.methods.vote(id).send({ from: account }); snackbar('Vote enregistré ✅'); await Promise.all([loadCandidates(), loadVoterStatus(), loadHistory()]); }
+        catch (e) { snackbar('Échec du vote: ' + (e?.message?.split('\n')[0] || 'Erreur')); }
     };
 
     const loadVoterStatus = async () => {
@@ -491,17 +373,11 @@
             html += ' ';
             html += v.hasVoted ? '<span class="badge">A déjà voté</span>' : '<span class="badge">Pas encore voté</span>';
             if (v.hasVoted) {
-                try {
-                    const c = await contract.methods.getCandidate(v.votedCandidateId).call();
-                    html += `<div class="subtle">Ton vote: <strong>${escapeHtml(c.name)}</strong> (ID ${v.votedCandidateId})</div>`;
-                } catch(e) {
-                    html += `<div class="subtle">Ton vote: candidat #${v.votedCandidateId}</div>`;
-                }
+                try { const c = await contract.methods.getCandidate(v.votedCandidateId).call(); html += `<div class="subtle">Ton vote: <strong>${escapeHtml(c.name)}</strong> (ID ${v.votedCandidateId})</div>`; }
+                catch(e) { html += `<div class="subtle">Ton vote: candidat #${v.votedCandidateId}</div>`; }
             }
             box.innerHTML = html;
-        } catch(e) {
-            box.innerHTML = '<span class="badge badge-warn">Impossible de récupérer ton statut (non inscrit ?)</span>';
-        }
+        } catch(e) { box.innerHTML = '<span class="badge badge-warn">Impossible de récupérer ton statut (non inscrit ?)</span>'; }
     };
 
     /*********************************
@@ -511,78 +387,65 @@
         if (!isOwner) return snackbar("Réservé à l'admin.");
         const name = $('#candName').value.trim();
         if (!name) return snackbar('Nom requis.');
-        try {
-            await contract.methods.addCandidate(name).send({ from: account });
-            $('#candName').value = '';
-            snackbar('Candidat créé.');
-            await loadCandidates();
-        } catch(e) {
-            snackbar('Échec création: ' + (e?.message?.split('\n')[0] || 'Erreur'));
-        }
+        try { await contract.methods.addCandidate(name).send({ from: account }); $('#candName').value = ''; snackbar('Candidat créé.'); await loadCandidates(); }
+        catch(e) { snackbar('Échec création: ' + (e?.message?.split('\n')[0] || 'Erreur')); }
     };
 
     const onAllowVoter = async () => {
         if (!isOwner) return snackbar("Réservé à l'admin.");
         const addr = $('#voterAddr').value.trim();
         if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) return snackbar('Adresse invalide.');
-        try {
-            await contract.methods.addVoter(addr).send({ from: account });
-            $('#voterAddr').value='';
-            snackbar('Votant autorisé.');
-            // Si on s'est autorisé soi-même, refresh le statut
-            await loadVoterStatus();
-        } catch(e) {
-            snackbar("Échec d'autorisation: " + (e?.message?.split('\n')[0] || 'Erreur'));
-        }
+        try { await contract.methods.addVoter(addr).send({ from: account }); $('#voterAddr').value=''; snackbar('Votant autorisé.'); await loadVoterStatus(); }
+        catch(e) { snackbar("Échec d'autorisation: " + (e?.message?.split('\n')[0] || 'Erreur')); }
+    };
+
+    /*********************************
+     * VOTE MANUEL (ID ou nom)
+     *********************************/
+    const onManualVote = async () => {
+        if (!account) return snackbar('Connecte ton portefeuille.');
+        const val = ($('#manualVoteInput')?.value || '').trim();
+        if (!val) return snackbar('Saisis un ID ou un nom.');
+        let id = null;
+        if (/^\d+$/.test(val)) { id = parseInt(val, 10); }
+        else { const found = candCache.find(c => (c.name || '').toLowerCase() === val.toLowerCase()); if (found) id = found.id; }
+        if (id === null || Number.isNaN(id)) return snackbar('Candidat introuvable.');
+        await voteFor(id);
     };
 
     /*********************************
      * HISTORIQUE (événements)
      *********************************/
-    const setTabUI = () => {
-        $('#tabMine').classList.toggle('active', tab==='mine');
-        $('#tabAll').classList.toggle('active', tab==='all');
-    };
+    const setTabUI = () => { $('#tabMine').classList.toggle('active', tab==='mine'); $('#tabAll').classList.toggle('active', tab==='all'); };
 
     const loadHistory = async () => {
         const box = $('#history');
         box.innerHTML = '<div class="subtle">Chargement…</div>';
         if (!contract) return;
-
         try {
             const events = await contract.getPastEvents('VoteCast', { fromBlock: DEPLOYMENT_BLOCK, toBlock: 'latest' });
-            // Récupère les timestamps des blocks en batch
             const byBlock = {};
             const blocks = [...new Set(events.map(e => e.blockNumber))];
             const blockInfos = await Promise.all(blocks.map(bn => web3.eth.getBlock(bn)));
             blockInfos.forEach(b => byBlock[b.number] = b.timestamp);
 
-            // Construit éléments avec nom du candidat si possible
             const rows = [];
             for (const ev of events) {
                 const voter = ev.returnValues.voter;
                 const candId = parseInt(ev.returnValues.candidateId);
                 let candName = `#${candId}`;
-                try {
-                    const c = await contract.methods.getCandidate(candId).call();
-                    if (c && c.name) candName = c.name;
-                } catch {}
+                try { const c = await contract.methods.getCandidate(candId).call(); if (c && c.name) candName = c.name; } catch {}
                 const when = new Date((byBlock[ev.blockNumber] || Date.now()/1000) * 1000);
                 rows.push({ voter, candId, candName, when, block: ev.blockNumber, tx: ev.transactionHash });
             }
 
-            // Filtre selon l'onglet
             const filtered = tab==='mine' && account ? rows.filter(r => r.voter.toLowerCase() === account.toLowerCase()) : rows;
-            // Trie récent -> ancien
             filtered.sort((a,b) => b.when - a.when);
 
-            if (!filtered.length) {
-                box.innerHTML = '<div class="subtle">Aucun événement.</div>';
-                return;
-            }
+            if (!filtered.length) { box.innerHTML = '<div class="subtle">Aucun événement.</div>'; return; }
 
             box.innerHTML = '';
-            for (const r of filtered.slice(0, 200)) { // limite affichage
+            for (const r of filtered.slice(0, 200)) {
                 const el = document.createElement('div');
                 el.className = 'item';
                 el.innerHTML = `
@@ -594,31 +457,17 @@
           `;
                 box.appendChild(el);
             }
-        } catch (e) {
-            box.innerHTML = '<div class="subtle">Impossible de charger les événements (réseau ou droits restreints).</div>';
-        }
+        } catch (e) { box.innerHTML = '<div class="subtle">Impossible de charger les événements (réseau ou droits restreints).</div>'; }
     };
 
-    // Abonnement léger: on relance un refresh après un VoteCast récent
     let lightInterval = null;
-    const subscribeLight = () => {
-        if (lightInterval) clearInterval(lightInterval);
-        // sans websocket, on se contente de rafraîchir périodiquement
-        lightInterval = setInterval(() => {
-            loadCandidates();
-            loadHistory();
-            loadVoterStatus();
-        }, 15000);
-    };
+    const subscribeLight = () => { if (lightInterval) clearInterval(lightInterval); lightInterval = setInterval(() => { loadCandidates(); loadHistory(); loadVoterStatus(); }, 15000); };
 
     /*********************************
      * HELPERS
      *********************************/
-    function escapeHtml(str) {
-        return String(str).replace(/[&<>"] /g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]||s));
-    }
+    function escapeHtml(str) { return String(str).replace(/[&<>\"]/g, (s) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[s] || s)); }
 
-    // Go !
     window.addEventListener('load', init);
 </script>
 </body>
