@@ -21,33 +21,16 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
     * Vérification de la compatibilité Solidity 0.8.24 + optimizer.
     * Décisions techniques
 
+* **Iles – DevOps Hardhat**
 
-* **\[Nom 3] – DevOps Hardhat**
-
-    * `hardhat.config.ts` (localhost:8545, chainId 31337)
-    * Scripts `deploy.js`, `seed.js`, scripts npm utiles
-* **\[Nom 4] – Intégration Web3**
-
-    * Connexion Web3 → contrat (`web3.eth.Contract`, ABI)
-    * Appels `addCandidate/addVoter/vote`, gestion d’erreurs
-* **\[Nom 5] – Front-End Lead**
-
-    * Architecture UI `index.html`, composants/sections, état & badges
-* **\[Nom 6] – UI/UX**
-
-    * Styles (thème, responsive), snackbar, micro-interactions
-* **\[Nom 7] – Historique & Events**
-
-    * Récup `getPastEvents('VoteCast')`, mapping timestamp bloc
-* **\[Nom 8] – QA / Tests manuels**
-
-    * Scénarios : autorisation, double vote, ID invalide, reset node
-* **\[Nom 9] – Docs & PM**
-
-    * Rédaction **README**, procédures, check-lists, conventions commit
-* **\[Nom 10] – Sécurité / Revue**
-
-    * Menaces : owner hijack, entrées invalides, reset réseau, UX erreurs
+   * Responsabilités
+   * Configuration de Hardhat : réseau localhost:8545, chainId 31337, toolbox.
+   * Scripts de déploiement (ethers v6) et de seed.
+   * hardhat.config.ts (optimizer ON, chemins, network localhost).
+   * scripts/deploy.js (usage waitForDeployment(), getAddress()).
+   * scripts/seed.js (ajout candidats + autorisation d’un votant).
+   * Décisions techniques : Standardisation sur le port 8545, procédures Windows (netstat/taskkill) si port occupé.
+   * Fichiers: hardhat.config.ts, scripts/*.js.
 
 ---
 
