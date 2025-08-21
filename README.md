@@ -56,6 +56,45 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
    * Liste historisée (200 derniers max), lien vers explorer (placeholder).
    * Cache léger + tri côté client par date.
    * JS historique dans index.html.
+ 
+* **Arthur DEUMENI — QA / E2E / Recette**
+
+Responsabilités
+
+Rédaction d’un plan de test détaillé.
+
+Scénarios d’erreurs : Invalid candidate, Non autorisé, double vote, contrat non trouvé.
+
+Livrables clés
+
+Feuille de test (Google Sheet/Markdown), tickets/bugs remontés et suivis.
+
+Décisions techniques
+
+Tests manuels multi-comptes MetaMask
+
+Fichiers
+
+ * **Grégoire LEROGNON — Documentation & Pilotage**
+
+Responsabilités
+
+Rédaction du README.md (installation, commandes, dépannage, rôles).
+
+Conventions de commit.
+
+Roadmap/Milestones, coordination du groupe (10 personnes).
+
+Livrables clés
+
+README.md, guide “Quickstart”, check-lists.
+
+Décisions techniques
+
+Trunk-based (ou Gitflow léger) + PRs systématiques.
+
+Fichiers.
+
 
 ---
 
