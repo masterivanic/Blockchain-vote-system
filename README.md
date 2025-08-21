@@ -1,137 +1,225 @@
-## Groupe-C - Projet Blockchain – Système de vote (Hardhat + Solidity)
+# DApp de Vote – Hardhat + MetaMask
 
+Application de vote décentralisée : connexion MetaMask, création de **candidats** (par l’owner), autorisation des **votants**, vote, et historique on-chain.
 
-# Rôles & “qui a fait quoi” (équipe de 10)
+* **Contrat** : `contracts/Voting.sol`
+* **Déploiement local** : Hardhat (`localhost:8545`, chainId **31337**)
+* **Front** : `index.html` (Web3.js)
 
-- Phillipe MBARGA – Lead Smart-Contract
-Conception Voting.sol (structures, events, onlyOwner)
-Revue sécurité des require et flux vote()
+## 🎯 Fonctionnalités
 
-- Iles YAZI – DevOps Hardhat
-hardhat.config.ts (localhost:8545, chainId 31337)
-Scripts deploy.js, seed.js, scripts npm utiles
+* Connexion MetaMask (badges d’état réseau / contrat / compte)
+* Panneau **Administration** (visible par `owner()` uniquement)
 
+    * `addCandidate(name)`
+    * `addVoter(address)`
+* Liste des candidats + vote (boutons et **vote manuel** par ID/nom)
+* Statut votant (autorisé / a voté / pour qui)
+* Historique : événements `VoteCast` (mon historique / tous les votes)
 
+---
 
+## 🧱 Stack
 
---------
-Ce projet met en place un système de vote simple sur Ethereum (réseau local Hardhat) :
+* **Solidity 0.8.24**
+* **Hardhat** (+ ethers v6, toolbox)
+* **Web3.js** (front)
+* **MetaMask** (réseau local `localhost:8545` – chainId 31337)
 
-- Les électeurs ne peuvent voter qu’une seule fois
-- Les résultats sont publics et vérifiables
-- Interface en ligne de commande (scripts Node.js)
+---
 
-### Contenu du dépôt
+## 📂 Structure
 
-- `contracts/Voting.sol` : smart contract Solidity
-- `scripts/deploy.ts` : déploiement du contrat
-- `scripts/simulate.ts` : simulation de votes multi-comptes et export des résultats
-- `results/sample-simulation.json` : exemple de résultats
-- `TEAM.md` : modèle de répartition des tâches dans l’équipe
-- `.gitignore`, `.env.example`, `hardhat.config.ts`, `tsconfig.json`, `package.json`
+```
+contracts/
+  Voting.sol
+scripts/
+  deploy.js        # déploie le contrat et affiche l’adresse
+  seed.js          # (optionnel) crée des candidats + autorise un votant
+index.html         # UI complète (MetaMask + Admin + Vote + Historique)
+hardhat.config.ts  # config réseau (localhost:8545, chainId 31337)
+```
 
-### Prérequis
+---
 
-- Node.js LTS (>= 18)
-- npm (fourni avec Node)
+## 🚀 Démarrage rapide
 
-### Installation
-
-1. Installer les dépendances
+### 0) Prérequis
 
 ```bash
-npm install
+node -v  # >= 18 recommandé
+npm i
 ```
 
-2. Compiler le smart contract
+### 1) Lancer la chaîne locale
 
 ```bash
-npx hardhat compile
+npx hardhat node --port 8545
 ```
 
-### Exécution rapide (simulation locale)
+> Hardhat imprime une liste d’adresses **avec clés privées**.
+> **Owner = 1er compte** (ex. `0xf39F...92266`).
 
-Lance une simulation de votes sur le réseau local Hardhat et écrit un fichier de résultats dans `results/`.
+### 2) Déployer le contrat
 
 ```bash
-npx hardhat run scripts/simulate.ts
+npx hardhat run scripts/deploy.js --network localhost
+# => Voting contract deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3  (exemple)
 ```
 
-Options (facultatif) :
+### 3) Configurer l’UI (adresse du contrat)
 
-- Définir vos candidats via variable d’environnement :
+Dans `index.html`, remplace :
+
+```js
+const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // <-- ton adresse
+```
+
+### 4) (Optionnel) Seed (candidats + votant)
+
+**scripts/seed.js** (déjà fourni) :
 
 ```bash
-$env:CANDIDATES="Alice,Bob,Charlie"; npx hardhat run scripts/simulate.ts  # PowerShell
+# édite scripts/seed.js et mets VOTER_ADDRESS = ton adresse MetaMask
+npx hardhat run scripts/seed.js --network localhost
 ```
 
-ou en arguments CLI :
+ou **console Hardhat** :
 
 ```bash
-npx hardhat run scripts/simulate.ts -- Alice Bob Charlie
+npx hardhat console --network localhost
+const [owner] = await ethers.getSigners();
+const V = await ethers.getContractAt("Voting","<ADRESSE_CONTRAT>", owner);
+await (await V.addCandidate("Alice")).wait();
+await (await V.addCandidate("Bob")).wait();
+await (await V.addVoter("<ADRESSE_METAMASK_VOTANT>")).wait();
 ```
 
-Le script affichera un tableau de résultats et générera un fichier JSON daté dans `results/`.
+### 5) Ouvrir le front
 
-### Déploiement simple (réseau local Hardhat)
+* Ouvrez **`index.html`** dans votre navigateur (via un serveur statique type “Live Server” de VSCode ou double-clic).
+* **MetaMask** → réseau **Localhost 8545** (chainId **31337**).
+* Connectez-vous avec **l’owner** pour voir la carte **Administration**.
+* Créez des candidats, **autorisez** l’adresse qui va voter, puis **votez**.
+
+---
+
+## 🔐 Rôles & “qui a fait quoi” (équipe de 10)
+
+
+* **\[Nom 1] – Lead Smart-Contract**
+
+    * Conception `Voting.sol` (structures, events, `onlyOwner`)
+    * Revue sécurité des require et flux `vote()`
+* **\[Nom 2] – Smart-Contract Engineer**
+
+    * Tests unitaires (si ajoutés), cas limites, gas/optimisation
+* **\[Nom 3] – DevOps Hardhat**
+
+    * `hardhat.config.ts` (localhost:8545, chainId 31337)
+    * Scripts `deploy.js`, `seed.js`, scripts npm utiles
+* **\[Nom 4] – Intégration Web3**
+
+    * Connexion Web3 → contrat (`web3.eth.Contract`, ABI)
+    * Appels `addCandidate/addVoter/vote`, gestion d’erreurs
+* **\[Nom 5] – Front-End Lead**
+
+    * Architecture UI `index.html`, composants/sections, état & badges
+* **\[Nom 6] – UI/UX**
+
+    * Styles (thème, responsive), snackbar, micro-interactions
+* **\[Nom 7] – Historique & Events**
+
+    * Récup `getPastEvents('VoteCast')`, mapping timestamp bloc
+* **\[Nom 8] – QA / Tests manuels**
+
+    * Scénarios : autorisation, double vote, ID invalide, reset node
+* **\[Nom 9] – Docs & PM**
+
+    * Rédaction **README**, procédures, check-lists, conventions commit
+* **\[Nom 10] – Sécurité / Revue**
+
+    * Menaces : owner hijack, entrées invalides, reset réseau, UX erreurs
+
+---
+
+## 🛠️ Commandes utiles
 
 ```bash
-npx hardhat run scripts/deploy.ts
+# Lancer la chaîne locale
+npx hardhat node --port 8545
+
+# Déployer le contrat (localhost)
+npx hardhat run scripts/deploy.js --network localhost
+
+# Seed (candidats + votant)
+npx hardhat run scripts/seed.js --network localhost
+
+# Console interactive reliée au node
+npx hardhat console --network localhost
 ```
 
-Options pour les candidats :
+---
 
-```bash
-$env:CANDIDATES="Alice,Bob,Charlie"; npx hardhat run scripts/deploy.ts  # PowerShell
+## 🧩 MetaMask – réseau local
 
-# ou
-npx hardhat run scripts/deploy.ts -- Alice Bob Charlie
-```
+* Réseau : **Localhost 8545**
+* **ChainId** : 31337 (Hardhat).
 
-Le script écrit un artefact d’adresse/ABI dans `deployments/local/Voting.json`.
+  > Si vous aviez 1337 auparavant, alignez **hardhat.config** et MetaMask.
+* Si besoin, l’UI peut forcer l’ajout/switch via `wallet_addEthereumChain` / `wallet_switchEthereumChain`.
 
-### Smart contract – Règles
+---
 
-- Initialisation avec une liste de candidats
-- `vote(candidateIndex)` : un seul vote par adresse, uniquement quand le vote est ouvert
-- L’owner (déployeur) peut ouvrir/fermer le vote
-- Lecture publique des résultats
+## 🩺 Dépannage (FAQ)
 
-### Livrables demandés
+**“Non connecté / Réseau: Mainnet”**
+→ Dans MetaMask, sélectionnez **Localhost 8545** (pas Ethereum Mainnet).
 
-- Code du smart contract : `contracts/Voting.sol`
-- Résultats de vote : exécuter `npx hardhat run scripts/simulate.ts` puis récupérer le JSON dans `results/`
-- Répartition de l’équipe : compléter `TEAM.md`
+**“Contrat: introuvable”** dans l’UI
+→ `CONTRACT_ADDRESS` n’est pas la bonne adresse **de déploiement**.
+Redéployez et remettez l’adresse imprimée par `deploy.js`.
 
-### Structure
+**“Non autorisé”**
+→ Vous n’avez pas été ajouté via `addVoter(address)`.
+Connectez-vous en **owner** (déployeur) → Admin → Autoriser votre adresse.
 
-```
-.
-├─ contracts/
-│  └─ Voting.sol
-├─ scripts/
-│  ├─ deploy.ts
-│  └─ simulate.ts
-├─ results/
-│  └─ sample-simulation.json
-├─ deployments/
-│  └─ local/ (généré à l’exécution)
-├─ hardhat.config.ts
-├─ tsconfig.json
-├─ package.json
-├─ .env.example
-└─ .gitignore
-```
+**`Error: reverted with reason string 'Invalid candidate'`**
+→ Aucun candidat à cet ID. Créez des candidats (Admin) ou via `seed`.
+Vérifiez `getCandidate(0)` en console.
 
-### Notes pédagogiques
+**`address already in use 127.0.0.1:8545`**
 
-- Les scripts utilisent les comptes par défaut du réseau Hardhat pour simuler plusieurs électeurs
-- Le vote est ouvert par défaut à la création du contrat, puis peut être fermé
-- Les événements `VoteCast`, `VotingOpened`, `VotingClosed` facilitent l’audit
+* **Windows** :
 
-### Licence
+  ```bat
+  netstat -ano | findstr :8545
+  taskkill /PID <PID> /F
+  ```
+* **macOS/Linux** :
 
-Projet éducatif – libre réutilisation dans un cadre pédagogique.
+  ```bash
+  lsof -i :8545
+  kill -9 <PID>
+  ```
 
+**Après redémarrage de `hardhat node`**
+→ La chaîne est **reset** : **redeploy**, mettez à jour `CONTRACT_ADDRESS`, recréez candidats & votants (ou relancez `seed`).
 
- 
+---
+
+## ✅ Conventions commit (exemples)
+
+* `feat(dapp): UI admin + vote manuel + historique`
+* `fix(contract): revert si candidateId invalide + tests`
+* `chore(hardhat): seed script + switch network helper`
+* `docs(readme): guide d’installation & rôles équipe`
+
+---
+
+## 📜 Licence
+
+MIT — voir `LICENSE` (ou la licence de votre choix).
+
+---
+
