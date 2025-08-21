@@ -1,0 +1,25 @@
+# Node / Hardhat
+node_modules/
+artifacts/
+cache/
+coverage/
+coverage.json
+typechain/
+typechain-types/
+dist/
+*.tsbuildinfo
+
+# Env
+.env
+
+# OS
+.DS_Store
+
+# Deployments (générés localement)
+deployments/
+
+# Résultats générés par simulation
+results/*.json
+!results/sample-simulation.json
+
+

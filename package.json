@@ -1,0 +1,24 @@
+{
+  "name": "voting-blockchain",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Système de vote sur blockchain (Hardhat + Solidity)",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "simulate": "hardhat run scripts/simulate.ts",
+    "clean": "rimraf artifacts cache typechain typechain-types"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "dotenv": "^16.6.1",
+    "hardhat": "^2.26.3",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
