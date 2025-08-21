@@ -59,41 +59,33 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
  
 * **Arthur DEUMENI — QA / E2E / Recette**
 
-Responsabilités
+   * Responsabilités
 
-Rédaction d’un plan de test détaillé.
+   * Rédaction d’un plan de test détaillé.
 
-Scénarios d’erreurs : Invalid candidate, Non autorisé, double vote, contrat non trouvé.
+   * Scénarios d’erreurs : Invalid candidate, Non autorisé, double vote, contrat non trouvé.
 
-Livrables clés
+   * Livrables clés
 
-Feuille de test (Google Sheet/Markdown), tickets/bugs remontés et suivis.
+   * Feuille de test (Google Sheet/Markdown), tickets/bugs remontés et suivis.
 
-Décisions techniques
+   * Décisions techniques
 
-Tests manuels multi-comptes MetaMask
+   * Tests manuels multi-comptes MetaMask
 
-Fichiers
+   * Fichiers
 
  * **Grégoire LEROGNON — Documentation & Pilotage**
 
-Responsabilités
+   * Responsabilités
 
-Rédaction du README.md (installation, commandes, dépannage, rôles).
+   * Rédaction du README.md (installation, commandes, dépannage, rôles).
 
-Conventions de commit.
+   * Conventions de commit.
 
-Roadmap/Milestones, coordination du groupe (10 personnes).
+   * Roadmap/Milestones, coordination du groupe (10 personnes).
 
-Livrables clés
-
-README.md, guide “Quickstart”, check-lists.
-
-Décisions techniques
-
-Trunk-based (ou Gitflow léger) + PRs systématiques.
-
-Fichiers.
+   * Livrables clés
 
 
 ---
