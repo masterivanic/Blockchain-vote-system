@@ -14,9 +14,9 @@ module.exports = {
   },
   defaultNetwork: "hardhat",
   networks: {
-    localhost: {
-      url: "http://127.0.0.1:8545",
-      chainId: 31337
+    hardhat: {
+      //url: "http://127.0.0.1:8545",
+      chainId: 1337
     },
     // You can add other networks here
     // sepolia: {
