@@ -5,10 +5,10 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
 
     const Voting = await ethers.getContractFactory("Voting");
-    const voting = await Voting.deploy();           // déploiement
-    await voting.waitForDeployment();               // attendre le minage
+    const voting = await Voting.deploy();          
+    await voting.waitForDeployment();               
 
-    const addr = await voting.getAddress();         // <-- v6 : récupérer l'adresse
+    const addr = await voting.getAddress();         
     console.log("Voting contract deployed to:", addr);
 }
 
