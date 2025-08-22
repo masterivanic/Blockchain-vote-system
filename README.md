@@ -11,7 +11,7 @@ Application de vote décentralisée : connexion MetaMask, création de **candida
 ## 🔐 Rôles & “qui a fait quoi”
 
 
-* **Philippe MBARGA – Lead Smart-Contract**
+* **masterivanic – Lead Smart-Contract**
     * Conception `Voting.sol` (structures, events, `onlyOwner`)
     * Revue sécurité des require et flux `vote()`
     * Revue sécurité (lecture/écriture storage, visibilité, reverts clairs).
