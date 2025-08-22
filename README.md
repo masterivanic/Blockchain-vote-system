@@ -298,6 +298,13 @@ Vérifiez `getCandidate(0)` en console.
 
 ---
 
+## DEMO des votes
+
+![Les votes](./images/image.png)
+![alt text](./images/image-1.png)
+![alt text](./images/image-2.png)
+
+
 ## 📜 Licence
 
 MIT — voir `LICENSE` (ou la licence de votre choix).
